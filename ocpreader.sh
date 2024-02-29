@@ -14,16 +14,20 @@ if [[ ! -f $FILEINPUT ]]; then
   exit 1
 fi
 
+if [[ $(uname) == "Darwin" ]]; then
+  MAC="''"
+fi
+
 cp $FILEINPUT $FILE
 
-sed -i '' 's/\\u001b\[\d(;\d\d)?m//g' $FILE # no idea if this is working
-sed -i '' 's/\\\\/\\/g' $FILE
-sed -i '' 's/\\\\/\\/g' $FILE # we need more power
-sed -i '' 's/\\\\/\\/g' $FILE # even more power!
-sed -i '' 's/\\r/\\/g' $FILE
-sed -i '' 's/\\"/"/g' $FILE
-sed -i '' 's/\\"/"/g' $FILE # same more power needed
-sed -i '' 's/\\n/\n/g' $FILE
+sed -i $MAC 's/\\u001b\[\d(;\d\d)?m//g' $FILE # no idea if this is working
+sed -i $MAC 's/\\\\/\\/g' $FILE
+sed -i $MAC 's/\\\\/\\/g' $FILE # we need more power
+sed -i $MAC 's/\\\\/\\/g' $FILE # even more power!
+sed -i $MAC 's/\\r/\\/g' $FILE
+sed -i $MAC 's/\\"/"/g' $FILE
+sed -i $MAC 's/\\"/"/g' $FILE # same more power needed
+sed -i $MAC 's/\\n/\n/g' $FILE
 
 echo ""
 echo "DONE: ${FILE}"
